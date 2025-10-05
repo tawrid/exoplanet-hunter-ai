@@ -24,9 +24,15 @@ target = 'tfopwg_disp'
 
 # Standardize disposition labels
 df[target] = df[target].str.upper().replace({
-    'FALSE': 'FALSE POSITIVE',
-    'NOT DISPOSITIONED': 'CANDIDATE',
-    'UNCONFIRMED': 'CANDIDATE'
+    'FALSE POSITIVE': 'FP',      # Kepler-style → TESS
+    'FALSE': 'FP',
+    'CANDIDATE': 'PC',
+    'PLANET CANDIDATE': 'PC',
+    'UNCONFIRMED': 'APC',        # Ambiguous Planet Candidate
+    'AMBIGUOUS': 'APC',
+    'CONFIRMED': 'CP',           # Confirmed Planet
+    'KNOWN PLANET': 'KP',        # Known Planet
+    'FALSE ALARM': 'FA'          # False Alarm
 })
 
 # Preprocess: Drop rows with missing target/features, fill others with median

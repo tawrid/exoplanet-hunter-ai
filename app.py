@@ -146,11 +146,24 @@ def load_and_preprocess_data(model_type):
     target = config['target']
     
     # Standardize disposition labels for K2 and TESS
-    if model_type in ['K2', 'TESS']:
+    if model_type == 'K2':
         df[target] = df[target].str.upper().replace({
             'FALSE': 'FALSE POSITIVE',
             'NOT DISPOSITIONED': 'CANDIDATE',
             'UNCONFIRMED': 'CANDIDATE'
+        })
+
+    if model_type == 'TESS':
+        df[target] = df[target].str.upper().replace({
+            'FALSE POSITIVE': 'FP',
+            'FALSE': 'FP',
+            'CANDIDATE': 'PC',
+            'PLANET CANDIDATE': 'PC',
+            'UNCONFIRMED': 'APC',
+            'AMBIGUOUS': 'APC',
+            'CONFIRMED': 'CP',
+            'KNOWN PLANET': 'KP',
+            'FALSE ALARM': 'FA'
         })
     
     df = df.dropna(subset=[target] + features)
@@ -273,11 +286,24 @@ if retrain and model is not None:
         log_features = config['log_features']
         target = config['target']
         
-        if model_type in ['K2', 'TESS']:
+        if model_type in ['K2']:
             df[target] = df[target].str.upper().replace({
                 'FALSE': 'FALSE POSITIVE',
                 'NOT DISPOSITIONED': 'CANDIDATE',
                 'UNCONFIRMED': 'CANDIDATE'
+            })
+
+        if model_type in ['TESS']:
+            df[target] = df[target].str.upper().replace({
+                'FALSE POSITIVE': 'FP',      # Kepler-style → TESS
+                'FALSE': 'FP',
+                'CANDIDATE': 'PC',
+                'PLANET CANDIDATE': 'PC',
+                'UNCONFIRMED': 'APC',        # Ambiguous Planet Candidate
+                'AMBIGUOUS': 'APC',
+                'CONFIRMED': 'CP',           # Confirmed Planet
+                'KNOWN PLANET': 'KP',        # Known Planet
+                'FALSE ALARM': 'FA'          # False Alarm
             })
         
         df = df.dropna(subset=[target] + features)
@@ -363,7 +389,10 @@ if uploaded_file is not None:
             preds = np.argmax(probs, axis=1)
             
             threshold = 0.5
-            fp_label = le.transform(['FALSE POSITIVE'])[0]
+            if model_type == 'K2':
+                fp_label = le.transform(['FALSE POSITIVE'])[0]
+            if model_type == 'TESS':
+                fp_label = le.transform(['FP'])[0]
             adjusted_preds = preds.copy()
             low_conf_mask = confidences < threshold
             adjusted_preds[low_conf_mask] = fp_label
@@ -406,11 +435,24 @@ if uploaded_file is not None:
                     if current_df is not None:
                         new_data = df_filled[features + [target]]
                         combined = pd.concat([current_df, new_data], ignore_index=True)
-                        if model_type in ['K2', 'TESS']:
-                            combined[target] = combined[target].str.upper().replace({
+                        if model_type == 'K2':
+                            df[target] = df[target].str.upper().replace({
                                 'FALSE': 'FALSE POSITIVE',
                                 'NOT DISPOSITIONED': 'CANDIDATE',
                                 'UNCONFIRMED': 'CANDIDATE'
+                            })
+
+                        if model_type == 'TESS':
+                            df[target] = df[target].str.upper().replace({
+                                'FALSE POSITIVE': 'FP',
+                                'FALSE': 'FP',
+                                'CANDIDATE': 'PC',
+                                'PLANET CANDIDATE': 'PC',
+                                'UNCONFIRMED': 'APC',
+                                'AMBIGUOUS': 'APC',
+                                'CONFIRMED': 'CP',
+                                'KNOWN PLANET': 'KP',
+                                'FALSE ALARM': 'FA'
                             })
                         combined = combined.dropna(subset=[target] + features)
                         for col in features:
