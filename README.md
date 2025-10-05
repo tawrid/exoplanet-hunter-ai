@@ -22,7 +22,7 @@
 
 
 ## Recorded Video Link
-https://github.com/tawrid/exoplanet-hunter-ai/tree/main/videos/video_record.mp4
+https://tawrid.github.io/exoplanet-hunter-ai/videos/video_record.mp4
 
 
 Questions? Open issue!
