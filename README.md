@@ -18,6 +18,6 @@
 - Researchers: Select the model from left navigation → Tweak params → Retrain → Ingest new labeled data. View confusion matrix in expander.
 
 ## Recorded Video
-![Recorded Demo](images/video_record.mov)
+![Recorded Demo](videos/video_record.mp4)
 
 Questions? Open issue!
