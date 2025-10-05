@@ -17,7 +17,12 @@
 - Novices: Select the model from left navigation → Upload unlabeled CSV → Get predictions.
 - Researchers: Select the model from left navigation → Tweak params → Retrain → Ingest new labeled data. View confusion matrix in expander.
 
-## Recorded Video
-![Recorded Demo](https://github.com/tawrid/exoplanet-hunter-ai/tree/main/videos/video_record.mp4)
+## Screenshot
+![Screenshot](images/screenshot_saurons_eye.png)
+
+
+## Recorded Video Link
+https://github.com/tawrid/exoplanet-hunter-ai/tree/main/videos/video_record.mp4
+
 
 Questions? Open issue!
