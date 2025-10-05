@@ -83,7 +83,7 @@ MODEL_CONFIGS = {
         ],
         'log_features': ['koi_period', 'koi_insol', 'koi_model_snr', 'koi_prad', 'koi_teq', 'koi_depth'],
         'target': 'koi_disposition',
-        'data_file': './data/kepler.csv'
+        'data_file': 'data/kepler.csv'
     },
     'K2': {
         'model_file': './models/k2_model.joblib',
@@ -95,7 +95,7 @@ MODEL_CONFIGS = {
         ],
         'log_features': ['pl_orbper', 'pl_insol', 'pl_rade', 'pl_eqt'],
         'target': 'disposition',
-        'data_file': './data/k2.csv'
+        'data_file': 'data/k2.csv'
     },
     'TESS': {
         'model_file': './models/tess_model.joblib',
@@ -107,7 +107,7 @@ MODEL_CONFIGS = {
         ],
         'log_features': ['pl_orbper', 'pl_insol', 'pl_rade', 'pl_eqt', 'pl_trandep'],
         'target': 'tfopwg_disp',
-        'data_file': './data/tess.csv'
+        'data_file': 'data/tess.csv'
     }
 }
 
