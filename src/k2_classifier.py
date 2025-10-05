@@ -12,7 +12,7 @@ warnings.filterwarnings('ignore')
 os.makedirs('./models', exist_ok=True)
 
 # Load K2 CSV file from local /data directory
-df = pd.read_csv('./data/k2.csv')
+df = pd.read_csv('data/k2.csv')
 
 # Features (K2-specific parameters)
 features = [
