@@ -2,7 +2,6 @@ model.joblib
 label_encoder.joblib
 __pycache__/
 *.pyc
-data/
 .venv/
 backup/
 images/*.mov
