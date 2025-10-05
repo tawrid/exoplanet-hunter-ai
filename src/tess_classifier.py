@@ -12,7 +12,7 @@ warnings.filterwarnings('ignore')
 os.makedirs('./models', exist_ok=True)
 
 # Load TESS CSV file from local /data directory
-df = pd.read_csv('data/tess.csv')
+df = pd.read_csv('data/tess.csv', on_bad_lines='warn', engine='python')
 
 # Features (TESS-specific parameters)
 features = [

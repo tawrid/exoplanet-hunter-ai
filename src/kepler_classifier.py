@@ -12,7 +12,7 @@ warnings.filterwarnings('ignore')
 os.makedirs('./models', exist_ok=True)
 
 # Load Kepler CSV file from local /data directory
-df = pd.read_csv('data/kepler.csv')
+df = pd.read_csv('data/kepler.csv', on_bad_lines='warn', engine='python')
 
 # Features (Kepler-specific transit parameters)
 features = [
