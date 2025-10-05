@@ -72,9 +72,9 @@ st.markdown(
 # Model-specific configurations
 MODEL_CONFIGS = {
     'Kepler': {
-        'model_file': './models/kepler_model.joblib',
-        'encoder_file': './models/kepler_label_encoder.joblib',
-        'scaler_file': './models/kepler_scaler.joblib',
+        'model_file': 'models/kepler_model.joblib',
+        'encoder_file': 'models/kepler_label_encoder.joblib',
+        'scaler_file': 'models/kepler_scaler.joblib',
         'features': [
             'koi_fpflag_nt', 'koi_fpflag_ss', 'koi_fpflag_co', 'koi_fpflag_ec',
             'koi_period', 'koi_time0bk', 'koi_impact', 'koi_duration',
@@ -86,9 +86,9 @@ MODEL_CONFIGS = {
         'data_file': 'data/kepler.csv'
     },
     'K2': {
-        'model_file': './models/k2_model.joblib',
-        'encoder_file': './models/k2_label_encoder.joblib',
-        'scaler_file': './models/k2_scaler.joblib',
+        'model_file': 'models/k2_model.joblib',
+        'encoder_file': 'models/k2_label_encoder.joblib',
+        'scaler_file': 'models/k2_scaler.joblib',
         'features': [
             'pl_orbper', 'pl_rade', 'pl_eqt', 'pl_insol',
             'st_teff', 'st_logg', 'st_rad'
@@ -98,9 +98,9 @@ MODEL_CONFIGS = {
         'data_file': 'data/k2.csv'
     },
     'TESS': {
-        'model_file': './models/tess_model.joblib',
-        'encoder_file': './models/tess_label_encoder.joblib',
-        'scaler_file': './models/tess_scaler.joblib',
+        'model_file': 'models/tess_model.joblib',
+        'encoder_file': 'models/tess_label_encoder.joblib',
+        'scaler_file': 'models/tess_scaler.joblib',
         'features': [
             'pl_orbper', 'pl_tranmid', 'pl_trandurh', 'pl_trandep',
             'pl_rade', 'pl_eqt', 'pl_insol', 'st_teff', 'st_logg', 'st_rad'
@@ -115,7 +115,7 @@ MODEL_CONFIGS = {
 def get_data(model_type):
     config = MODEL_CONFIGS[model_type]
     try:
-        df = pd.read_csv(config['data_file'])
+        df = pd.read_csv(config['data_file'], engine='python', on_bad_lines='warn')
     except FileNotFoundError:
         st.error(f"Data file {config['data_file']} not found in ./data directory.")
         return None
@@ -339,7 +339,7 @@ target = config['target']
 uploaded_file = st.file_uploader(f"Upload CSV for {model_type} (columns: " + ", ".join(features[:5]) + "...)", type="csv")
 
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
+    df = pd.read_csv(uploaded_file, engine='python', on_bad_lines='warn')
     st.write("Uploaded Data Preview:")
     st.dataframe(df.head())
     

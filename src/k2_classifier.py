@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import streamlit as st
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder, StandardScaler
@@ -9,10 +10,15 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Ensure models directory exists
-os.makedirs('./models', exist_ok=True)
+os.makedirs('models', exist_ok=True)
 
-# Load K2 CSV file from local /data directory
-df = pd.read_csv('data/k2.csv', on_bad_lines='warn', engine='python')
+# Load K2 CSV from local path
+try:
+    df = pd.read_csv('data/k2.csv', engine='python', on_bad_lines='warn')
+    st.success("CSV loaded successfully!")
+    st.write(df.head())
+except Exception as e:
+    st.error(f"Error reading CSV: {e}")
 
 # Features (K2-specific parameters)
 features = [
@@ -66,7 +72,7 @@ print("K2 Classification Report:")
 print(classification_report(y_test, y_pred, target_names=le.classes_, labels=range(len(le.classes_))))
 
 # Save model, label encoder, and scaler in ./models directory
-dump(model, './models/k2_model.joblib')
-dump(le, './models/k2_label_encoder.joblib')
-dump(scaler, './models/k2_scaler.joblib')
+dump(model, 'models/k2_model.joblib')
+dump(le, 'models/k2_label_encoder.joblib')
+dump(scaler, 'models/k2_scaler.joblib')
 print("K2 model, label encoder, and scaler saved in ./models/")
