@@ -1,0 +1,17 @@
+name: Deploy to GCP
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Deploy to GCP App Engine
+      uses: google-github-actions/deploy-appengine@v1
+      with:
+        deliverables: app.yaml
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}

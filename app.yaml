@@ -1,0 +1,4 @@
+runtime: python313
+entrypoint: streamlit run app.py --server.port=$PORT --server.address=0.0.0.0
+env_variables:
+  STREAMLIT_SERVER_HEADLESS: "true"
