@@ -7,7 +7,7 @@ def test_model_accuracy():
     model = joblib.load('model.joblib')
     le = joblib.load('label_encoder.joblib')
     # Load small test data (assume data/test.csv exists)
-    df_test = pd.read_csv('data/sample_input.csv')
+    df_test = pd.read_csv('./data/sample_input.csv')
     features = [
         'koi_fpflag_nt', 'koi_fpflag_ss', 'koi_fpflag_co', 'koi_fpflag_ec',
         'koi_period', 'koi_time0bk', 'koi_impact', 'koi_duration',

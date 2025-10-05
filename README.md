@@ -17,4 +17,7 @@
 - Novices: Select the model from left navigation → Upload unlabeled CSV → Get predictions.
 - Researchers: Select the model from left navigation → Tweak params → Retrain → Ingest new labeled data. View confusion matrix in expander.
 
+## Recorded Video
+![Recorded Demo](images/video_record.mov)
+
 Questions? Open issue!
