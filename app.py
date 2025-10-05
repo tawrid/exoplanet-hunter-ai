@@ -388,11 +388,11 @@ if uploaded_file is not None:
             confidences = np.max(probs, axis=1)
             preds = np.argmax(probs, axis=1)
             
-            threshold = 0.5
-            if model_type == 'K2':
-                fp_label = le.transform(['FALSE POSITIVE'])[0]
+            threshold = 0.5    
             if model_type == 'TESS':
                 fp_label = le.transform(['FP'])[0]
+            else:
+                fp_label = le.transform(['FALSE POSITIVE'])[0]
             adjusted_preds = preds.copy()
             low_conf_mask = confidences < threshold
             adjusted_preds[low_conf_mask] = fp_label
